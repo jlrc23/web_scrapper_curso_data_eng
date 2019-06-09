@@ -8,12 +8,12 @@ class NewsPage:
         self._config = config()['news_sites'][news_site_uid]
         self._queries = self._config['queries']
         self._html = None
+        self._url = url
         self._visit(url)
 
 
     def _select(self, query_string):
         return self._html.select(query_string)
-        pass
 
 
     def _visit(self, url):
@@ -41,6 +41,11 @@ class HomePage(NewsPage):
 class ArticlePage(NewsPage):
     def __init__(self, news_site_uid, url):
         super().__init__(news_site_uid, url)
+
+    @property
+    def url(self):
+        return self._url
+
 
 
     @property
